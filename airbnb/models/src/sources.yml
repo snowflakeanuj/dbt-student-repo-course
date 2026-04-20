@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: airbnb
+    schema : raw
+    tables:
+      - name: listings
+        identifier: raw_listings
+        description: "This table contains information about Airbnb listings, including details such as the listing ID, host ID, location, price, and availability."
+      - name: hosts
+        identifier: raw_hosts
+        description: "This table contains information about Airbnb hosts, including details such as the host ID, host name, and host location." 
+      - name: reviews
+        identifier: raw_reviews
+        description: "This table contains information about Airbnb reviews, including details such as the review ID, listing ID, reviewer ID, and review text."
+        config:
+          loaded_at_field: date
+          freshness:
+            warn_after: {count: 1, period: hour}
+            error_after: {count: 24, period: day}
